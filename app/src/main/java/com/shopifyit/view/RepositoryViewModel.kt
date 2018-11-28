@@ -28,12 +28,8 @@ class RepositoryViewModel(application: Application) : AndroidViewModel(applicati
         repositoryList = repositoryDataRepository.allRepositoriesLiveData
     }
 
-    fun insert(item: Repository) = scope.launch(Dispatchers.IO) {
-        repositoryDataRepository.insert(item)
-    }
-
-    fun insertAll(list: List<Repository>) = scope.launch(Dispatchers.IO) {
-        repositoryDataRepository.insertAll(list)
+    fun saveToLocalDatabase(list: List<Repository>) = scope.launch(Dispatchers.IO) {
+        repositoryDataRepository.saveToLocalDatabase(list)
     }
 
     override fun onCleared() {

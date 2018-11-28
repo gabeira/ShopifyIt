@@ -11,10 +11,7 @@ interface RepositoryDao {
     fun getAll(): LiveData<List<Repository>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(repositories: List<Repository>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(repository: Repository)
+    fun insert(repositories: List<Repository>)
 
     @Query("DELETE FROM repositories")
     fun deleteAll()

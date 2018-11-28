@@ -1,4 +1,4 @@
-package com.shopifyit
+package com.shopifyit.view
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
@@ -10,10 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.shopifyit.MyApp
+import com.shopifyit.R
 import com.shopifyit.data.model.Repository
 import com.shopifyit.domain.getSortedRepositories
-import com.shopifyit.view.RepositoryAdapter
-import com.shopifyit.view.RepositoryViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 

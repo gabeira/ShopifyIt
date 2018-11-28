@@ -5,7 +5,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.shopifyit.MainActivity
 import com.shopifyit.R
 import com.shopifyit.data.model.Repository
 import com.shopifyit.domain.parseIsoDate
@@ -18,8 +17,8 @@ import kotlinx.android.synthetic.main.item_repository.view.*
  * specified [MainActivity.OnListRepositoryInteractionListener].
  */
 class RepositoryAdapter(
-        private val mValues: List<Repository>,
-        private val mListener: MainActivity.OnListRepositoryInteractionListener?
+    private val mValues: List<Repository>,
+    private val mListener: MainActivity.OnListRepositoryInteractionListener?
 ) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
 
     private val mOnClickListener: View.OnClickListener
@@ -33,14 +32,16 @@ class RepositoryAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_repository, parent, false)
+            .inflate(R.layout.item_repository, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = mValues[position]
-        holder.mDateView.text = holder.mView.resources.getString(R.string.date_created,
-                item.created_at.parseIsoDate().toStringDateFormat())
+        holder.mDateView.text = holder.mView.resources.getString(
+            R.string.date_created,
+            item.created_at.parseIsoDate().toStringDateFormat()
+        )
 
         holder.mNameView.text = item.name
 

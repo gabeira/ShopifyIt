@@ -1,7 +1,7 @@
 package com.shopifyit.di
 
 import android.app.Application
-import com.shopifyit.MainActivity
+import com.shopifyit.view.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 

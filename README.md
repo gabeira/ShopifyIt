@@ -1,5 +1,5 @@
 # ShopifyIt App
-![N|Solid](https://github.com/gabeira/ShopifyIt/blob/master/ShopifyIt/app/src/main/res/mipmap-mdpi/ic_launcher.png?raw=true)
+![N|Solid](https://raw.githubusercontent.com/gabeira/ShopifyIt/master/app/src/main/res/mipmap-mdpi/ic_launcher.png)
 
 This is an Android App to show Shopify Github Repositories.
 

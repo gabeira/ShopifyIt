@@ -38,6 +38,18 @@ class RepositoryViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun reload() {
-        repositoryDataRepository.loadFromRemote()
+        repositoryDataRepository.loadMoreFromRemote()
     }
+
+    companion object {
+        private const val VISIBLE_THRESHOLD = 6
+    }
+
+    fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int) {
+        if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount) {
+            repositoryDataRepository.loadMoreFromRemote()
+        }
+    }
+
+    fun getNetworkErrors() = repositoryDataRepository.networkErrors
 }

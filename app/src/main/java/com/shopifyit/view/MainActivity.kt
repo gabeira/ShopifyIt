@@ -6,10 +6,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.shopifyit.MyApp
 import com.shopifyit.R
 import com.shopifyit.data.model.Repository
@@ -29,22 +32,52 @@ class MainActivity : AppCompatActivity() {
 
         (application as MyApp).component?.inject(this)
 
-        //TODO Verify Network Available
-
         repositoryViewModel = ViewModelProviders.of(this).get(RepositoryViewModel::class.java)
         repositoryViewModel.repositoryList.observe(this, Observer { data ->
             swipeRefreshLayout.isRefreshing = false
             data?.let {
+                showEmptyListMessage(it.isEmpty())
                 repoList.adapter = RepositoryAdapter(
-                    data.getSortedRepositories(),
-                    onListEventInteractionListener()
+                        it.getSortedRepositories(),
+                        onListEventInteractionListener()
                 )
             }
         })
 
+        setupScrollListener()
+
         swipeRefreshLayout.setOnRefreshListener {
             repositoryViewModel.reload()
         }
+
+        repositoryViewModel.getNetworkErrors().observe(this, Observer<String> {
+            swipeRefreshLayout.isRefreshing = false
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        })
+    }
+
+    private fun showEmptyListMessage(show: Boolean) {
+        if (show) {
+            emptyList.visibility = View.VISIBLE
+            repoList.visibility = View.GONE
+        } else {
+            emptyList.visibility = View.GONE
+            repoList.visibility = View.VISIBLE
+        }
+    }
+
+    private fun setupScrollListener() {
+        val layoutManager = repoList.layoutManager as LinearLayoutManager
+        repoList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val totalItemCount = layoutManager.itemCount
+                val visibleItemCount = layoutManager.childCount
+                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+                repositoryViewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
+            }
+        })
     }
 
     override fun onDestroy() {

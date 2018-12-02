@@ -7,7 +7,7 @@ import com.shopifyit.data.model.Repository
 @Dao
 interface RepositoryDao {
 
-    @Query("SELECT * FROM repositories")
+    @Query("SELECT * FROM repositories ORDER BY stargazers_count DESC")
     fun getAll(): LiveData<List<Repository>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

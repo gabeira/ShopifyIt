@@ -22,7 +22,7 @@ class FormatExtensionsUnitTest {
     @Before
     fun setup() {
         repos.add(Repository(1, "Test1", "http://", "2018-05-17T02:00:00Z", 5, true))
-        repos.add(Repository(2, "Test2", "http://", "2018-05-27T02:00:00Z", 5, true))
+        repos.add(Repository(2, "Test2", "http://", "2018-05-27T02:00:00Z", 50, true))
     }
 
     @Test

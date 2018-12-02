@@ -5,5 +5,6 @@
     <string name="has_forks">Has Forks (Y/N):</string>
     <string name="date_created">Created: %s</string>
     <string name="open_url_browser_error">No application can handle this request. Please install a web browser or check your URL.</string>
+    <string name="no_results">No results</string>
 
 </resources>
